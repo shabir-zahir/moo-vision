@@ -75,3 +75,16 @@ body {
 button:focus {
     outline: none;
 }
+
+.input-container {
+    margin-bottom: 20px;
+  }
+  
+  .input-box {
+    padding: 10px;
+    width: 100%;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
