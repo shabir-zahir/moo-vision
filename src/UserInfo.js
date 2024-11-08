@@ -19,9 +19,9 @@ const UserInfo = () => {
     e.preventDefault();
     // Perform any validation or data submission here if needed
     console.log('User Info Submitted:', { number, url, phoneNumber });
-
+    setUrl(UrlInput)
     // Navigate to the thank you page or any other page
-    navigate('/thank-you'); // Adjust the route to your needs
+    navigate('/display-page', {state: {url}}); // Adjust the route to your needs
   };
 
   return (

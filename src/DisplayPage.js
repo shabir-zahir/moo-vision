@@ -1,2 +1,13 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';  // Import useNavigate hook
+// DisplayPage.js
+import React from 'react';
+
+const DisplayPage = () => {
+
+    return ( 
+    <div>
+        <h1> hello display </h1>
+    </div>
+    )
+};
+
+export default DisplayPage;

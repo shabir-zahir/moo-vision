@@ -1,13 +1,12 @@
+// App.js
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './App.css';
 import './styles.css';
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'; 
-import UserInfo from './UserInfo';
 
-// Main app component
 function App() {
-  const navigate = useNavigate(); // Use navigate to handle programmatic navigation
-  
+  const navigate = useNavigate();
+
   return (
     <div className="App">
       <div className="header-container">
@@ -20,7 +19,7 @@ function App() {
         </p>
         <button 
           className="button" 
-          onClick={() => navigate('/second-page')} // Corrected the path to match the route
+          onClick={() => navigate('/user-info')}
         >
           Go to Second Page
         </button>
@@ -29,17 +28,8 @@ function App() {
   );
 }
 
-// Main app setup with routing
-const Root = () => (
-  <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<App />} /> {/* The main homepage */}
-      <Route path="/second-page" element={<UserInfo />} /> {/* The second page */}
-    </Routes>
-  </BrowserRouter>
-);
+export default App;
 
-export default Root;
 
 
 
