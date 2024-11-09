@@ -7,6 +7,19 @@ import "./styles.css";
 function App() {
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const testServerConnection = async () => {
+      try {
+        const response = await axios.get("http://127.0.0.1:8080/api/users");  // Flask server URL
+        console.log(response.data.message);  // Should log: "Server is communicating successfully!"
+      } catch (error) {
+        console.error("Error communicating with server:", error);
+      }
+    };
+
+    testServerConnection();  // Call the test function when the component mounts
+  }, []);
+
   return (
     <div className="homepage">
       <div className="homepage-header-container">
@@ -39,5 +52,7 @@ function App() {
     </div>
   );
 }
+
+
 
 export default App;

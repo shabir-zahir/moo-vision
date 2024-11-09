@@ -3,7 +3,7 @@ import React from 'react';
 const NumberInput = ({ value, onChange }) => {
   return (
     <div className="input-container">
-      <label>Enter a number:</label>
+      <label>Enter number of cows in farm:</label>
       <input
         type="number"
         id="number"
