@@ -5,16 +5,34 @@ import cv2
 from collections import Counter
 import supervision as sv
 import os
+import time
 
-def show_recording(model):
-    source = "https://www.youtube.com/watch?v=QhLMlA3Wb8w&t=19s"  # Example YouTube URL
+def compare_cows(curr_cows, total_cows, mismatch_start, time_window):
+    if curr_cows == total_cows:
+        mismatch_start = time.time()
+    else:
+        curr_time = time.time()
+        if curr_time - mismatch_start > time_window:
+            #text user
+            pass
+    return mismatch_start
+
+def show_recording(model, total_cows, youtube_url ):
+    source = youtube_url
+    time_window = 5 # if we do not detect our cow count for 5 seconds text user
+    #source = "https://www.youtube.com/watch?v=QhLMlA3Wb8w&t=19s"  # Example YouTube URL
     frame_width, frame_height = 640, 480  # Adjust these values to fit your screen
 
     # Run inference on the source with streaming enabled
     results = model(source, stream=True, conf = .5)
+    
+    mismatch_start = time.time() 
+    # timer that indicates when the two cow counts STARTED to deviate
 
     # Loop over each frame in the results
     for result in results:
+        curr_cows = len(result)
+        mismatch_start = compare_cows(curr_cows, total_cows, mismatch_start, time_window)
         print(len(result), 'NUMBER OF COWS')
         frame = result.orig_img  # Get the original frame
 
