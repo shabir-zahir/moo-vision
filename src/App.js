@@ -1,27 +1,39 @@
 // App.js
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import './App.css';
-import './styles.css';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import "./App.css";
+import "./styles.css";
 
 function App() {
   const navigate = useNavigate();
 
   return (
-    <div className="App">
-      <div className="header-container">
-        <img src="/cowLogo.png" alt="Moo Vision Logo" className="logo" />
-        <h1 className="header-title">Moo Vision</h1>
+    <div className="homepage">
+      <div className="homepage-header-container">
+        <img
+          src="/cowLogo.png"
+          alt="Moo Vision Logo"
+          className="homepage-logo"
+        />
+        <h1 className="homepage-header-title">Moo Vision</h1>
       </div>
-      <div className="content">
-        <p className="header-blurb">
-          Welcome to Moo Vision! Explore our features and learn more about our services.
+      <div className="homepage-content">
+        <div className="cow-image-container">
+          <img src="/cowImage.png" alt="Cow" className="cow-image" />
+        </div>
+        <p className="homepage-header-blurb">
+          Welcome to Moo Vision! Do you have a farm full of cows that always
+          somehow seem to get lost? Well we have the perfect solution for you!
+          Our model detects the number of cows in your farm and lets you know
+          when one is missing. Just give us your number, in order to send
+          alerts, the numbers of cows in your farm, and a link to a stream of
+          your cows!
         </p>
-        <button 
-          className="button" 
-          onClick={() => navigate('/user-info')}
+        <button
+          className="homepage-button"
+          onClick={() => navigate("/user-info")}
         >
-          Go to Second Page
+          Get Started!
         </button>
       </div>
     </div>
@@ -29,8 +41,3 @@ function App() {
 }
 
 export default App;
-
-
-
-
-
