@@ -20,7 +20,7 @@ def get_user_info():
 
 @app.route("/api/users", methods=['GET'])
 def test():
-    return  jsonify('test')
+    return jsonify({"message": "This is the test endpoint!"})
 
 if __name__ == "__main__":
     app.run(debug = True, port = 8080)
