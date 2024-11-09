@@ -14,15 +14,25 @@ const DisplayPage = () => {
     },
   };
 
+  // Helper function to validate if the URL is a valid YouTube URL
+  const isValidYouTubeUrl = (url) => {
+    const youtubeRegex = /(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*\?v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+    return youtubeRegex.test(url);
+  };
+
   return (
     <div>
-      <h2 className='video-title'>Your Stream</h2>
+      <h2 className="video-title">Your Stream</h2>
       {/* If videoId exists, display the YouTube video */}
       {videoId ? (
         <YouTube videoId={videoId} opts={opts} />
       ) : url ? (
-        // If videoId doesn't exist but url does, show the URL (You can implement another way to display the stream if needed)
-        <p>Playing video from URL: {url}</p>
+        // If videoId doesn't exist but URL is valid, display it
+        isValidYouTubeUrl(url) ? (
+          <YouTube videoId={url.match(/(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*\?v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/)[1]} opts={opts} />
+        ) : (
+          <p>Invalid YouTube URL: {url}</p>
+        )
       ) : (
         <p>No video selected</p>
       )}
@@ -31,4 +41,5 @@ const DisplayPage = () => {
 };
 
 export default DisplayPage;
+
 

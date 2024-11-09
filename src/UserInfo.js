@@ -44,10 +44,9 @@ const UserInfo = () => {
       // Navigate to display-page and pass both videoId and url
       navigate('/display-page', { state: { videoId, url } });
     } catch (error) {
-      console.error('Error sending user info:', error);
+      console.error('Error sending user info:', error.response || error);
     }
   };
-  
 
   // Function to extract video ID from a YouTube URL
   const extractVideoId = (url) => {
@@ -58,13 +57,15 @@ const UserInfo = () => {
   return (
     <div>
       <h2>Enter your information:</h2>
-      <NumberInput value={number} onChange={handleNumberChange} />
-      <UrlInput value={url} onChange={handleUrlChange} />
-      <PhoneNumberInput value={phoneNumber} onChange={handlePhoneNumberChange} />
-
-      <button className="button" onClick={handleSubmit}>
-        Submit
-      </button>
+      <form onSubmit={handleSubmit}> {/* This is the form tag that wraps the inputs */}
+        <NumberInput value={number} onChange={handleNumberChange} />
+        <UrlInput value={url} onChange={handleUrlChange} />
+        <PhoneNumberInput value={phoneNumber} onChange={handlePhoneNumberChange} />
+  
+        <button type="submit" className="button">
+          Submit
+        </button>
+      </form>
     </div>
   );
 };
