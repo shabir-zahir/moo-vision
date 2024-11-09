@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-
+import predict_video
 app = Flask(__name__)
 cors = CORS(app, origins = '*')
 @app.route("/api/users", methods = ['POST'])
@@ -12,6 +12,7 @@ def get_user_info():
         total_cows = data.get('number')  # 'number' in React
         youtube_url = data.get('url')  # 'url' in React
         
+        predict_video.main(phone_number, total_cows, youtube_url)
         return jsonify({
             "message": "User created successfully",
             "phone_number": phone_number,

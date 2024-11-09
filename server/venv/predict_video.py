@@ -6,18 +6,28 @@ from collections import Counter
 import supervision as sv
 import os
 import time
+import requests
 
+def alert_frontend():
+    url = 'http://localhost:8080/api/process'
+    data = { 'missing_cows' : 'true'}
+    response = requests.post(url, json=data)
+    if response.status_code == 200:
+        result = response.json()  # Parse the response JSON
+        print("Response from backend:", result)
+    else:
+        print(f"Failed to send data: {response.status_code}")
 def compare_cows(curr_cows, total_cows, mismatch_start, time_window):
     if curr_cows == total_cows:
         mismatch_start = time.time()
     else:
         curr_time = time.time()
         if curr_time - mismatch_start > time_window:
-            #text user
+            alert_frontend()
             pass
     return mismatch_start
 
-def show_recording(model, total_cows, youtube_url ):
+def show_recording(model, phone_number, total_cows, youtube_url):
     source = youtube_url
     time_window = 5 # if we do not detect our cow count for 5 seconds text user
     #source = "https://www.youtube.com/watch?v=QhLMlA3Wb8w&t=19s"  # Example YouTube URL
@@ -51,12 +61,12 @@ def show_recording(model, total_cows, youtube_url ):
 # Release resources
 cv2.destroyAllWindows()
 
-def main():
-
+def main(phone_number, total_cows, youtube_url):
+    alert_frontend()
     model = YOLO('server/venv/moo_vision_v1.pt')
     
     #load custom cow detection model
-    show_recording(model)
+    show_recording(model, phone_number, total_cows, youtube_url)
     time.sleep(8)
 
 if __name__ == "__main__":
