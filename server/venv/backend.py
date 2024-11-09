@@ -18,9 +18,9 @@ def get_user_info():
             "youtube_url": youtube_url
         })
 
-
+@app.route("/api/users", methods=['GET'])
 def test():
-    return 'test'
+    return  jsonify('test')
 
 if __name__ == "__main__":
     app.run(debug = True, port = 8080)
