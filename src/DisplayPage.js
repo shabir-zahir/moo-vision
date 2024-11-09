@@ -4,29 +4,31 @@ import { useLocation } from 'react-router-dom';
 
 const DisplayPage = () => {
   const location = useLocation();
-  const { url, videoId } = location.state || {}; // Retrieve URL and Video ID
+  const { videoId, url } = location.state || {}; // Retrieve videoId and url from the location state
 
   const opts = {
     height: '390',
     width: '640',
     playerVars: {
-      autoplay: 1,
+      autoplay: 1,  // Autoplay the video
     },
   };
 
   return (
     <div>
-      <h2 className='video-title'> Your Stream </h2>
+      <h2 className='video-title'>Your Stream</h2>
+      {/* If videoId exists, display the YouTube video */}
       {videoId ? (
         <YouTube videoId={videoId} opts={opts} />
       ) : url ? (
-        <p>Playing video from URL: {url}</p> // Additional handling if URL is used in another way
+        // If videoId doesn't exist but url does, show the URL (You can implement another way to display the stream if needed)
+        <p>Playing video from URL: {url}</p>
       ) : (
         <p>No video selected</p>
       )}
-
     </div>
   );
 };
 
 export default DisplayPage;
+

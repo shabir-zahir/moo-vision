@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';  // Import useNavigate hook
+import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
+import axios from 'axios'; // Import axios for making HTTP requests
 import NumberInput from './components/NumberOfCows';
 import UrlInput from './components/UserStream';
 import PhoneNumberInput from './components/UserNumber';
@@ -22,15 +23,31 @@ const UserInfo = () => {
   
   const handlePhoneNumberChange = (e) => setPhoneNumber(e.target.value);
 
-  const navigate = useNavigate();  // Initialize the navigate function
+  const navigate = useNavigate(); // Initialize the navigate function
 
-  const handleSubmit = (e) => {
+  // Send user info to Python backend
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('User Info Submitted:', { number, url, phoneNumber, videoId });
-    
-    // Navigate to display-page and pass the videoId
-    navigate('/display-page', { state: { videoId } });
+  
+    const userInfo = {
+      number,
+      url,
+      phoneNumber,
+      videoId,
+    };
+  
+    try {
+      // Send data to your Python backend
+      const response = await axios.post('http://127.0.0.1:8080/api/users', userInfo);
+      console.log('Response from backend:', response.data);
+  
+      // Navigate to display-page and pass both videoId and url
+      navigate('/display-page', { state: { videoId, url } });
+    } catch (error) {
+      console.error('Error sending user info:', error);
+    }
   };
+  
 
   // Function to extract video ID from a YouTube URL
   const extractVideoId = (url) => {
@@ -53,6 +70,7 @@ const UserInfo = () => {
 };
 
 export default UserInfo;
+
 
 
 

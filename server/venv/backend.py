@@ -8,9 +8,10 @@ def get_user_info():
     if request.method == 'POST':
 
         data = request.get_json()
-        phone_number = data.get('phone_number')
-        total_cows = data.get('cow_count')
-        youtube_url = data.get('youtube_url')
+        phone_number = data.get('phoneNumber')  # 'phoneNumber' in React
+        total_cows = data.get('number')  # 'number' in React
+        youtube_url = data.get('url')  # 'url' in React
+        
         return jsonify({
             "message": "User created successfully",
             "phone_number": phone_number,
