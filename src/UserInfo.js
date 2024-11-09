@@ -77,7 +77,7 @@ const UserInfo = () => {
         </button>
         <button
           onClick={() => navigate("/display-page", { state: { videoId, url } })}
-          style={{ marginTop: "10px" }}
+          className="button"
         >
           Go to Display Page
         </button>
