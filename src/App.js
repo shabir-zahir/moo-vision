@@ -13,7 +13,8 @@ function App() {
         const response = await axios.get("http://127.0.0.1:8080/api/users");  // Flask server URL
         console.log(response.data.message);  // Should log: "Server is communicating successfully!"
       } catch (error) {
-        console.error("Error communicating with server:", error);
+        console.error("Error communicating with server:", error); 
+        console.error("idk whats happening")
       }
     };
 
