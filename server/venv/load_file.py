@@ -6,8 +6,21 @@ from collections import Counter
 import supervision as sv
 import os
 
+
+phone_number = None
+total_cows = None
+youtube_url = None
+
+def set_user_info(phone, cows, url):
+    global phone_number, total_cows, youtube_url
+    phone_number = phone
+    total_cows = cows
+    youtube_url = url
+    main()
+
 def show_recording(model):
-    source = "https://www.youtube.com/watch?v=QhLMlA3Wb8w&t=19s"  # Example YouTube URL
+    source = youtube_url
+    #source = #"https://www.youtube.com/watch?v=QhLMlA3Wb8w&t=19s"  # Example YouTube URL
     frame_width, frame_height = 640, 480  # Adjust these values to fit your screen
 
     # Run inference on the source with streaming enabled
@@ -34,8 +47,7 @@ def show_recording(model):
 cv2.destroyAllWindows()
 
 def main():
-
-    model = YOLO('server/venv/moo_vision_v1.pt')
+    model = YOLO('C:/Users/shabi/OneDrive/Desktop/moo_vision/moo-vision/server/venv/moo_vision_v1.pt')
     
     #load custom cow detection model
     show_recording(model)
