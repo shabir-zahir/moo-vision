@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+import load_file
 
 app = Flask(__name__)
 cors = CORS(app, origins = '*')
@@ -11,13 +12,18 @@ def get_user_info():
         phone_number = data.get('phoneNumber')  # 'phoneNumber' in React
         total_cows = data.get('number')  # 'number' in React
         youtube_url = data.get('url')  # 'url' in React
-        
+
+        # Call the main function from the imported file
+        load_file.set_user_info(phone_number,total_cows, youtube_url)  # Pass your params as a list
+
         return jsonify({
             "message": "User created successfully",
             "phone_number": phone_number,
             "total_cows": total_cows,
             "youtube_url": youtube_url
         })
+        
+
 
 @app.route("/api/users", methods=['GET'])
 def test():
